@@ -1,0 +1,318 @@
+
+
+####Work to be done -- in various cases here we need to verify that we are drawing iid according to the correct distributions.
+
+import math
+import random
+import numpy
+import pickle
+
+def drawMsphere(n,M):
+	'''
+	Draws iid uniformly from a M-sphere in R^{M + 1}
+	n is number of points
+	M is dimension
+	'''
+	points = []
+	i = 0
+	while i < n :
+		k = 0
+		randpoint = []
+		while k < M:
+			randpoint.append(random.gauss(0,1))
+			k = k + 1
+		sum = float(0)
+		for term in randpoint:
+			sum = sum + term*term
+		magnitude = math.sqrt(sum)
+		spherepoint = []
+		for term in randpoint:
+			spherepoint.append(float(term) / magnitude)
+		points.append(spherepoint)
+		i = i + 1
+	return points
+
+def draw2torusinR4(n):
+	#we draw 2m points iid uniformly from a circle in R^2, then pair them to get points from a 2-torus in R^4
+	points = []
+	i = 0
+	while i < n :
+		randpoint1 = [random.gauss(0,1), random.gauss(0,1)]
+		randpoint2 = [random.gauss(0,1), random.gauss(0,1)]
+		##
+		sum = float(0)
+		for term in randpoint1:
+			sum = sum + term*term
+		magnitude = math.sqrt(sum)
+		spherepoint1 = []
+		for term in randpoint1:
+			spherepoint1.append(float(term) / magnitude)
+			
+		sum = float(0)
+		for term in randpoint2:
+			sum = sum + term*term
+		magnitude = math.sqrt(sum)
+		spherepoint2 = []
+		for term in randpoint2:
+			spherepoint2.append(float(term) / magnitude)
+				
+		spherepoint = spherepoint1 + spherepoint2	
+		############
+		points.append(spherepoint)
+		i = i + 1
+		#######
+	return points
+	
+
+def sample(a):
+	#sampling from (a + cos(theta)) / (2 * pi * a+ 2 ) , theta in -pi, pi
+	#this is not very efficient if a is large
+	pi = math.pi
+	y = random.uniform(-pi, pi)
+	u = random.uniform(0,1)
+	if a + math.cos(y) > (a+1)*u:
+		return y
+	else:
+		return sample(a)
+	
+def circle(angle):
+	x = math.cos(angle)
+	y = math.sin(angle)
+	return [x,y]
+	
+	
+def draw2torusinR3(n,a):
+
+	#this draws n points from a torus in R^3. this is a surface of revolution around a circle of radius 1 centered at (a,0).
+	i = 0
+	toruspoints = []
+	while i < n:
+		#warning -- naive guess is to try
+		#circlepoint = drawMsphere(1,2)[0]
+		#this will not draw uniformly from the 2 torus. the reason is that naive construction, which draws iid from the latitudinal and longitudinal angles, will bunch up points near the inner equator. 
+		
+		#correct distribution on the circle angle is normalized a + cos(theta), where theta is the angle around the circle, and a is the distance from the origin of this circle to the axis of rotation. tcomputation involves some elementary differential geometry / multivariable calculus -- I might have made an error somewhere, it would be good if someone checked this. the associated cumulative density function doesn't have an elementary inverse, so we need to do rejection sampling, or something else. I'm naively implementing this as "sample" above -- if someone knows a more efficient way to do this, please make the change.
+		
+		angle = sample(a)
+		circlepoint = circle(angle)
+		translatedpoint = numpy.add(circlepoint, [2,0])
+		point3d = [0, translatedpoint[0], translatedpoint[1]]
+		
+		point = applyrandomrotationaroundz(point3d)
+		toruspoints.append(point)
+		i= i+ 1
+		
+	return toruspoints
+
+def applyrandomrotationaroundz(point):
+	#takes in a point of the form (x,y,z), and rotates it by a random angle around the z axis.
+	theta = random.uniform(0,2)*math.pi
+	#this can definately be done faster with numpy
+	x = point[0]
+	y = point[1]
+	xt = math.cos(theta)*x - math.sin(theta)*y
+	yt = math.sin(theta)*x + math.cos(theta)*y
+	return [xt,yt,point[2]]
+	
+
+###Mathematical question: Given $T = S^1 \times S^1 \subset R^4$, the flat torus, is there a (linear) projection that sends $T$ to the "standard" torus in $R^3$? Is there a $\pi: R^4 \to R^3$ so that $\pi|_T$ is an embedding? (Seems no, but I can't prove it off the top of my head.) If so, or if there is a similar construction, does it distort distances? It would be nice to apply that to the 2-torusin R4 construction.
+
+###General mathematical question -- how to produce "random" genus g surfaces in $R^3$? Is there a nice fiber bundle with genus g fibers one can draw from? (a universal genus g surface in R^3...) ... then how to draw iid uniformly from it?
+
+###The paper by Diaconis, Holmes, Shashahani on sampling from manifolds is relevant to all of this: http://statweb.stanford.edu/~susan/papers/sampling11.pdf
+
+def applyrandomorthogonaltransformation(pointlist):
+	#draw a random element of O(n) (isometry), and apply it to the pointlist. the dimension n is determined by the pointlist
+	
+	n = len(pointlist[0])
+	randomspherepoints = drawMsphere(n , n  )
+	matrix = numpy.array( randomspherepoints)
+	
+	#draws n points randomly from the sphere. are almost surely linearly independent, but if not, just repeat this.
+	
+	while numpy.linalg.det(matrix) == 0:
+		randomspherepoints = drawMsphere(n, n)
+	
+	QR = numpy.linalg.qr(matrix)
+	Q = QR[0]
+	#This has the affect of applying the GrahmSchmidt process to the matrix.
+	
+	#I'm not sure if this is drawn iid from O(n) ... there is something to show here. The diaconis article suggests filling a matrix with standard normal entries, then doing QR decompsoition.
+	
+	#applyit
+	
+	list = []
+	for term in pointlist:
+		list.append(numpy.dot(Q, term))
+	
+	return list
+
+	
+def cubification(meshnumber, points, radius):
+	#The mesh is the box [-radius, radius]^dimension, and we have meshnumber boxes in each direction, so meshnumber^dimension voxels total.
+	#Returns list of cubes in the mesh that contain one of the points in "points"
+
+	cubes = []
+	n = len(points[0])
+	coordinatelist = range(0,n)
+	for point in points:
+		coord = [partitionnum(meshnumber, point[i], radius) for i in coordinatelist]
+		cubes.append(coord)
+	
+	return cubes
+	
+def partitionnum(meshnumber, value, radius):
+	#[-radius, radius] is broken up in a mesh with meshnumber many boxes, and this returns which box value belongs to
+	meshsize = float((2*radius))/float(meshnumber)
+	i = 0
+	if value == -1*radius:
+		return 0
+	while i < meshnumber:
+		if (i*meshsize - radius < value) & ((i + 1)*meshsize - radius >= value):
+			return i
+		i = i + 1 
+	return "Not In Range"
+	
+def applyrandomscaling(pointlist, r):
+	rnew = random.uniform(0,r)
+	list2 = []
+	for term in pointlist:
+		list2.append(numpy.dot(term, rnew))
+	return list2
+	
+	
+def applyrandomtranslation(pointlist, r):
+	#r is max distance to translate by
+	n = len(pointlist[0])
+	randomspherepoint = drawMsphere(1, n)[0]
+	#picks a random direction
+	scale = random.uniform(0,r)
+	translator = numpy.dot(randomspherepoint, scale)
+	list2 = []
+	for term in pointlist:
+		list2.append(numpy.add(term, translator))
+		
+	return list2
+	
+def createspheredata(number):
+	g = open("spheredata",'w')
+	i = 0
+	while i < number:
+		spherepoints = drawMsphere(1000,3)
+		
+
+		spherepoints = applyrandomscaling(spherepoints, 10)
+		spherepoints = applyrandomtranslation(spherepoints, 10)
+		
+		g.write("SPHERE:" + "\n")
+		for item in spherepoints:	
+			for spot in item:
+				g.write(str(spot) + ",")
+			g.write("\n")
+		i = i+1
+	
+
+def createtorusdata(number):
+	g = open("torusdata",'w')
+	i = 0
+	while i < number:
+		toruspoints = draw2torusinR3(1000,3)
+		toruspoints = applyrandomtranslation(toruspoints, 10)
+		toruspoints = applyrandomorthogonaltransformation(toruspoints)
+		toruspoints = applyrandomscaling(toruspoints, 10)
+		g.write("TORUS:" + "\n")
+		for item in toruspoints:
+			for spot in item:
+				g.write(str(spot) + ",")
+			g.write("\n")
+		
+		i = i+1		
+
+#####
+
+def buildrandomtori(m):
+	randomtori = []
+	i = 0
+	while i < m:
+		toruspoints = draw2torusinR3(1000,3)
+		toruspoints = applyrandomtranslation(toruspoints, 10)
+		toruspoints = applyrandomorthogonaltransformation(toruspoints)
+		toruspoints = applyrandomscaling(toruspoints, 10)
+		
+		#randomtori = randomtori + toruspoints
+		#this seems to distort the images --- no idea why
+		#do instead:
+		
+		form term in toruspoints:
+			random.append(term)
+		i = i + 1
+	return randomtori
+	
+def buildrandomspheres(m):
+	random = []
+	i = 0
+	while i < m:
+		spherepoints = drawMsphere(1000,3)
+			
+		##Ellipse
+		##spherepoints = applyrandomtranslation(spherepoints, 10)
+		##spherepoints = applyrandomscaling(spherepoints, 10)
+		
+		##Sphere
+		spherepoints = applyrandomscaling(spherepoints, 10)
+		spherepoints = applyrandomtranslation(spherepoints, 10)
+		for term in spherepoints:
+			random.append(term)
+		i = i + 1
+	return random
+
+import matplotlib as mpl
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def graph(points):
+	data = numpy.array(points)
+	fig = plt.figure()
+	ax = fig.add_subplot(111, projection='3d')
+	ax.scatter(data[:,0],data[:,1],data[:,2])
+	ax.set_xlabel("X")
+	ax.set_ylabel("Y")
+	ax.set_zlabel("Z")
+	plt.axis('scaled')
+	plt.show()
+
+
+####
+
+spherepoints = drawMsphere(1000,3)
+toruspoints = draw2torusinR4(10)
+spherecubes = cubification(100, spherepoints, 2)
+toruscubes = cubification(10, toruspoints, 2)
+toruspointsinR3 = draw2torusinR3(10,2)
+
+##To create data:
+#createspheredata(10)
+#createtorusdata(10)
+
+# FOR VERIFYING OUTPUT
+# sphere
+#for p in list:
+#	print(sum([math.pow(term,2) for term in p]))
+#print list
+
+# to play game, run
+#r = game(100)
+#make your guess from the images
+#print r to see if you were right!
+def game(N):
+
+	sphere = drawMsphere(N,3)
+	torus = draw2torusinR3(N,3)
+	r = random.uniform(-1,1)
+	if r > 0 :
+		graph(torus)
+	if r < 0 :
+		graph(sphere)
+	return r

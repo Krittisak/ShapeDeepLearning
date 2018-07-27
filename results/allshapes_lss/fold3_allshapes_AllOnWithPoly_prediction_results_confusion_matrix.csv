@@ -1,0 +1,6 @@
+,torus_true,pyramid_true,cube_true,sphere_true,squaretorus_true
+torus_prediction,17,4,4,17,3
+pyramid_prediction,4,15,14,5,12
+cube_prediction,8,18,17,6,7
+sphere_prediction,13,7,8,18,5
+squaretorus_prediction,4,9,5,3,17

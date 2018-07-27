@@ -1,0 +1,314 @@
+Using Theano backend.
+{'activation_function1': 'relu', 'activation_function2': 'softmax', 'batch_size': 32, 'dropout1': 0.2, 'dropout2': 0.5, 'earlystop': 1, 'epochs': 25, 'filter_count': 32, 'filter_size': 3, 'fold': 0, 'folds': 5, 'grid_radius': 20, 'grid_resolution': 0.5, 'kfcv': 1, 'kfcv_serial': 1, 'layer_count': 1, 'learning_rate': 0.01, 'momentum': 0.9, 'noise': 0, 'pooling': 2, 'random_seed': 6, 'root_name': 'default_0', 'rotation': 0, 'sampling_floats': 0, 'sampling_rate': 10000, 'save_model': 0, 'scale': 7, 'scale_randomness': 0, 'seed': 5305, 'test_classes': ['sphere', 'torus'], 'testing_size': 100, 'train_classes': ['sphere', 'torus'], 'training_size': 400, 'transformation': 0, 'translation': 0, 'validation_split': 0.2, 'visualize': 0}
+Generating Data
+Generating Data - Complete!
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 326s - loss: 0.0656 - acc: 0.9750 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 326s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 328s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 347s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 330s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+100/100 [==============================] - 33s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 330s - loss: 0.0639 - acc: 0.9812 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 326s - loss: 1.5255e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 320s - loss: 1.1940e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 328s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 356s - loss: 1.7080e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+100/100 [==============================] - 35s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 347s - loss: 0.0670 - acc: 0.9719 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 329s - loss: 1.1977e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 318s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 322s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 320s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+100/100 [==============================] - 33s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 323s - loss: 0.0648 - acc: 0.9750 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 324s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 318s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 325s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 321s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+100/100 [==============================] - 36s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 351s - loss: 0.0720 - acc: 0.9437 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 323s - loss: 1.2312e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 319s - loss: 1.7714e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 319s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 326s - loss: 1.1921e-07 - acc: 1.0000 - val_loss: 1.1921e-07 - val_acc: 1.0000
+100/100 [==============================] - 32s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+Using Theano backend.
+{'activation_function1': 'relu', 'activation_function2': 'softmax', 'batch_size': 32, 'dropout1': 0.2, 'dropout2': 0.5, 'earlystop': 1, 'epochs': 25, 'filter_count': 32, 'filter_size': 3, 'fold': 0, 'folds': 5, 'grid_radius': 20, 'grid_resolution': 0.5, 'kfcv': 1, 'kfcv_serial': 1, 'layer_count': 1, 'learning_rate': 0.01, 'momentum': 0.9, 'noise': 0, 'pooling': 2, 'random_seed': 6, 'root_name': 'scale_randomness_1', 'rotation': 0, 'sampling_floats': 0, 'sampling_rate': 10000, 'save_model': 0, 'scale': 7, 'scale_randomness': 1, 'seed': 2471, 'test_classes': ['sphere', 'torus'], 'testing_size': 100, 'train_classes': ['sphere', 'torus'], 'training_size': 400, 'transformation': 0, 'translation': 0, 'validation_split': 0.2, 'visualize': 0}
+Generating Data
+Generating Data - Complete!
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 325s - loss: 0.1073 - acc: 0.9500 - val_loss: 9.1762e-04 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 320s - loss: 0.0015 - acc: 1.0000 - val_loss: 7.4772e-06 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 319s - loss: 3.3629e-04 - acc: 1.0000 - val_loss: 2.9424e-06 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 321s - loss: 2.9751e-05 - acc: 1.0000 - val_loss: 2.0989e-06 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 318s - loss: 1.0185e-04 - acc: 1.0000 - val_loss: 1.8717e-06 - val_acc: 1.0000
+100/100 [==============================] - 33s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 340s - loss: 0.0948 - acc: 0.9500 - val_loss: 2.2166e-06 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 326s - loss: 7.5838e-04 - acc: 1.0000 - val_loss: 1.9744e-07 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 318s - loss: 9.3289e-06 - acc: 1.0000 - val_loss: 5.8115e-07 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 322s - loss: 1.7060e-04 - acc: 1.0000 - val_loss: 1.3560e-07 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 317s - loss: 1.1466e-06 - acc: 1.0000 - val_loss: 1.2070e-07 - val_acc: 1.0000
+100/100 [==============================] - 33s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 321s - loss: 0.1249 - acc: 0.9563 - val_loss: 2.6563e-05 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 319s - loss: 6.4005e-05 - acc: 1.0000 - val_loss: 1.5923e-05 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 320s - loss: 9.7170e-05 - acc: 1.0000 - val_loss: 2.3846e-05 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 317s - loss: 4.4926e-04 - acc: 1.0000 - val_loss: 7.3513e-06 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 319s - loss: 3.6034e-06 - acc: 1.0000 - val_loss: 2.8151e-06 - val_acc: 1.0000
+100/100 [==============================] - 32s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 339s - loss: 0.1049 - acc: 0.9500 - val_loss: 1.2044e-04 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 329s - loss: 0.0151 - acc: 0.9938 - val_loss: 1.8787e-05 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 316s - loss: 3.5451e-04 - acc: 1.0000 - val_loss: 1.8045e-04 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 313s - loss: 0.0022 - acc: 1.0000 - val_loss: 7.3826e-05 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 321s - loss: 1.2538e-04 - acc: 1.0000 - val_loss: 4.0171e-05 - val_acc: 1.0000
+100/100 [==============================] - 32s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 322s - loss: 0.1259 - acc: 0.9062 - val_loss: 2.3015e-05 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 312s - loss: 2.9549e-05 - acc: 1.0000 - val_loss: 7.2793e-07 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 318s - loss: 2.4582e-05 - acc: 1.0000 - val_loss: 3.2857e-07 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 316s - loss: 1.6325e-05 - acc: 1.0000 - val_loss: 2.6748e-07 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 315s - loss: 6.0689e-06 - acc: 1.0000 - val_loss: 2.5034e-07 - val_acc: 1.0000
+100/100 [==============================] - 35s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+Using Theano backend.
+{'activation_function1': 'relu', 'activation_function2': 'softmax', 'batch_size': 32, 'dropout1': 0.2, 'dropout2': 0.5, 'earlystop': 1, 'epochs': 25, 'filter_count': 32, 'filter_size': 3, 'fold': 0, 'folds': 5, 'grid_radius': 20, 'grid_resolution': 0.5, 'kfcv': 1, 'kfcv_serial': 1, 'layer_count': 1, 'learning_rate': 0.01, 'momentum': 0.9, 'noise': 0, 'pooling': 2, 'random_seed': 6, 'root_name': 'scale_randomness_2', 'rotation': 0, 'sampling_floats': 0, 'sampling_rate': 10000, 'save_model': 0, 'scale': 7, 'scale_randomness': 2, 'seed': 6468, 'test_classes': ['sphere', 'torus'], 'testing_size': 100, 'train_classes': ['sphere', 'torus'], 'training_size': 400, 'transformation': 0, 'translation': 0, 'validation_split': 0.2, 'visualize': 0}
+Generating Data
+Generating Data - Complete!
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 326s - loss: 0.1623 - acc: 0.9187 - val_loss: 0.0071 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 340s - loss: 0.0109 - acc: 0.9969 - val_loss: 0.0032 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 315s - loss: 0.0087 - acc: 0.9969 - val_loss: 0.0015 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 316s - loss: 0.0060 - acc: 0.9969 - val_loss: 9.1077e-04 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 318s - loss: 0.0044 - acc: 0.9969 - val_loss: 6.9261e-04 - val_acc: 1.0000
+100/100 [==============================] - 33s
+Total predicted: 100
+Num Correct: 98
+Accuracy: 0.98
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 329s - loss: 0.1164 - acc: 0.9531 - val_loss: 0.0064 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 323s - loss: 0.0284 - acc: 0.9875 - val_loss: 0.0015 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 317s - loss: 0.0085 - acc: 1.0000 - val_loss: 6.7424e-04 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 324s - loss: 0.0037 - acc: 1.0000 - val_loss: 4.6030e-04 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 319s - loss: 0.0039 - acc: 1.0000 - val_loss: 3.3314e-04 - val_acc: 1.0000
+100/100 [==============================] - 34s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 327s - loss: 0.1569 - acc: 0.9219 - val_loss: 0.0077 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 319s - loss: 0.0089 - acc: 0.9969 - val_loss: 0.0019 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 334s - loss: 0.0085 - acc: 0.9969 - val_loss: 0.0010 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 339s - loss: 0.0048 - acc: 1.0000 - val_loss: 7.8322e-04 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 322s - loss: 0.0033 - acc: 1.0000 - val_loss: 5.9380e-04 - val_acc: 1.0000
+100/100 [==============================] - 33s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 321s - loss: 0.1244 - acc: 0.9500 - val_loss: 0.0042 - val_acc: 1.0000
+Epoch 2/25
+320/320 [==============================] - 323s - loss: 0.0079 - acc: 0.9969 - val_loss: 3.0983e-04 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 320s - loss: 0.0100 - acc: 0.9938 - val_loss: 1.4635e-04 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 321s - loss: 0.0046 - acc: 1.0000 - val_loss: 9.7850e-05 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 318s - loss: 0.0041 - acc: 0.9969 - val_loss: 1.3712e-04 - val_acc: 1.0000
+100/100 [==============================] - 33s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 80 samples
+Epoch 1/25
+320/320 [==============================] - 324s - loss: 0.1410 - acc: 0.9125 - val_loss: 0.0174 - val_acc: 0.9875
+Epoch 2/25
+320/320 [==============================] - 320s - loss: 0.0109 - acc: 1.0000 - val_loss: 0.0062 - val_acc: 1.0000
+Epoch 3/25
+320/320 [==============================] - 338s - loss: 0.0057 - acc: 1.0000 - val_loss: 0.0080 - val_acc: 1.0000
+Epoch 4/25
+320/320 [==============================] - 331s - loss: 0.0041 - acc: 1.0000 - val_loss: 0.0076 - val_acc: 1.0000
+Epoch 5/25
+320/320 [==============================] - 320s - loss: 0.0031 - acc: 1.0000 - val_loss: 0.0058 - val_acc: 1.0000
+Epoch 6/25
+320/320 [==============================] - 321s - loss: 0.0033 - acc: 1.0000 - val_loss: 0.0049 - val_acc: 1.0000
+100/100 [==============================] - 33s
+Total predicted: 100
+Num Correct: 100
+Accuracy: 1.0

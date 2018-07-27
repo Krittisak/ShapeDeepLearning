@@ -1,0 +1,25 @@
+Parameters To Consider?
+
+Training size
+Learning Rate .01, .1
+Epochs 25, 50, 75, 100
+Batch Size
+filters 2^4 -> 2^8
+Momentum
+Filter size
+Activation Functions?
+Pooling
+Number of layers
+Folds?
+Dropout
+sampling_rate=100,
+gridresolution=.5,
+gridradius=15,
+train_classes=["sphere","torus"]
+test_classes=["sphere","torus"],
+translation=0,
+rotation=0,
+transformation=0,
+noise=0,
+scale_randomness=0,
+scale=1

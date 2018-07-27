@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: writeup.aux
+The style file: icml2017.bst
+Database file #1: writeup.bib
+Warning--empty journal in curto2016can
+Warning--empty journal in symnets
+You've used 13 entries,
+            2773 wiz_defined-function locations,
+            679 strings with 7376 characters,
+and the built_in function-call counts, 6286 in all, are:
+= -- 564
+> -- 361
+< -- 9
++ -- 122
+- -- 109
+* -- 497
+:= -- 969
+add.period$ -- 48
+call.type$ -- 13
+change.case$ -- 72
+chr.to.int$ -- 13
+cite$ -- 28
+duplicate$ -- 292
+empty$ -- 512
+format.name$ -- 127
+if$ -- 1329
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 13
+newline$ -- 80
+num.names$ -- 54
+pop$ -- 155
+preamble$ -- 1
+purify$ -- 60
+quote$ -- 0
+skip$ -- 221
+stack$ -- 0
+substring$ -- 214
+swap$ -- 37
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 138
+warning$ -- 2
+while$ -- 56
+width$ -- 0
+write$ -- 185
+(There were 2 warnings)

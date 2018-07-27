@@ -1,0 +1,184 @@
+#This is code to produce more complicated transformations. The input is a point-cloud, and so is the output.
+
+#  transformedpoints = applywalk(self.points, generatorset, wordlength)
+#This is the format required
+from scipy.linalg import qr
+from scipy.linalg import expm
+
+
+def walk(n,m):
+	#this returns a random word of length $n$ in $m$ letters,  0... m-1, as a np.array
+	#also returns list of exponents
+	i = 0
+	word = np.array([])
+	exp = np.array([])
+	while i < n:
+		a = random.choice(range(0,m+1))
+		word = np.append(word,a)
+		b = random.choice([1,-1])
+		exp = np.append(exp,b)
+		i = i + 1
+	return [word, exp]
+		
+def spin(point, c,d):
+	
+	z = point[2]
+	x = point[0]
+	y = point[1]
+	cosval = np.cos(c*z + d)
+	sinval = np.sin(c*z+ d)
+	x2 = cosval* x - sinval * y
+	y2 = sinval*x + cosval*y
+	point[0] = x2
+	point[1] = y2
+	
+	return point
+
+def spinshape(pointlist,c,d):
+	for term in pointlist:
+		spin(term,c,d)
+	return pointlist
+	
+def randomdistort(pointlist,n,m):
+	list = walk(n,m)
+	word = list[0]
+	pointlist = distort(pointlist,word)
+	return pointlist
+	
+def twistup(pointlist,g,d):
+	#apply g
+	if g == 0:
+		for term in pointlist:
+			term[2] = term[2] + np.power(term[0],d) + np.power(term[1],d)
+	if g == 1:
+		for term in pointlist:
+			term[2] = term[2] + np.power(term[0],d)
+	if g == 2:
+		for term in pointlist:
+			term[2] = term[2] + np.power(term[0],d)
+			term[1] = term[1] + np.power(term[0],d)
+	return pointlist
+	
+def twistdown(pointlist,g,d):
+	#apply g inverse
+	if g == 0:
+		for term in pointlist:
+			term[2] = term[2] - np.power(term[0],d) - np.power(term[1],d)
+	if g == 1:
+		for term in pointlist:
+			term[2] = term[2] - np.power(term[0],d)
+	if g == 2:
+		for term in pointlist:
+			term[2] = term[2] - np.power(term[0],d)
+			term[1] = term[1] - np.power(term[0],d)
+	return pointlist
+	
+import copy
+
+
+#Mathematically clear groups we can study here:
+#1 - SO(3)
+#2 - gSO(3)g^-1, for algberaic g of the form (x,y,z) ->(x,y,z + f(x,y))
+## Inside of this -- add f(x,y) to z, or f(x), g(x) to y and z. degree of f. coefficients of f -- fixed or random?
+## more general way to phrase this? the most compact way to phrase this should be a list of coefficients 
+##This is nice because these are compact groups,so we can draw from them uniformly. also it is nice because the result is an algebraic variety. 
+#3 - one parameter subgroups of SL_2(R) or SO(2), parametrized by one axis
+
+def distort(pointlistin, word):
+	pointlist = copy.deepcopy(pointlistin)
+	
+	#just to avoid changing the original list.... not the optimal way to do this. probably we want to change the file in place
+	
+	#list = walk(steps,2)
+	#second entry is list of transformations to use
+	#word = list[0]
+	#exp = list[1]
+	
+	##Really want to organize this into certain groups of transformations.
+	
+	#Dictionary:
+	#0 -- random rotation around 0
+	#1 -- random (Gaussian) translation 
+	#2 -- random parametrization of SO(2) by z axis, applied to xy plane
+	#3 random one parameter subgroup of GL2(R) parametrized by z axis (slow!)
+	#4 -- conjugates the next letter by a random polynomial transformations
+	#5 -- twist up or down by adding x^2 + y^2 to z
+	#Sample word: word = [2,2,2,0,2,1,2,0,1,0,1,2]
+	
+	i = 0
+	while i < len(word):
+		if int(word[i]) == 0:
+			#rotation
+			H = np.random.randn(3,3)
+			Q,R = qr(H)
+			pointlist = np.dot(pointlist, Q)
+		if int(word[i]) == 1:
+			#translation
+			v = np.random.randn(3)
+			pointlist = pointlist + v*5
+		if int(word[i]) == 2:
+			#c is spin rate
+			#d is phase
+			#spins around z axis at angle proportional to height
+			c = random.uniform(-.25,.25)
+			d = random.uniform(0,1)
+			spinshape(pointlist,c,d)
+		if int(word[i]) == 3:
+			#A random one parameter subgroup of $GL_2$ parameterized by $z$
+			#In fact, because we want to avoid transformations that squish too much, we want to pick matrices with determinant one.
+			#So draw randomly from the lie algbera sl2(R) instead
+			
+			A = np.array([[0,1],[0,0]])
+			B = np.array([[0,0],[1,0]])
+			C = np.array([[1,0],[0,-1]])
+			
+			v = np.random.randn(3)
+			H = A*v[0] + B*v[1] + C*v[2]
+			
+			for term in pointlist:
+				G = expm(H*(term[2]/float(10)))
+				newterm = np.dot([term[0], term[1]],G)
+				term[0] = newterm[0]
+				term[1] = newterm[1]
+			#this is very slow!
+		if int(word[i]) == 4:
+			#action by conjugatation by some fixed g, then inside we put another distortion
+			#input to distort should be [4,k], where it means, conjugate a distortion of k by g
+			g = np.random.choice(np.arange(0,3))
+			d = np.random.choice(np.arange(1,3))
+			#only one for now
+			pointlist = twistup(pointlist,g,d)
+			pointlist = distort(pointlist,[word[i + 1]])
+			pointlist = twistdown(pointlist,g,d)
+			i = i + 1 #skip the next word
+		if int(word[i]) == 5:
+			c = np.random.uniform(0,1)
+			if c > .5:
+				pointlist = twistup(pointlist,0)
+			if c <= .5:
+				pointlist = twistdown(pointlist,0)
+				
+		if int(word[i]) == -1:
+			##In this one, we take a one parameter subgroup SL_3 R, parametrized by a random functional...
+			##This is not guaranteed to produced a diffeomorphism, btw so I'm removing from action. keep it here for reference.
+			H = np.random.randn(3,3)
+			v = np.random.randn(3)
+			v = v / numpy.linalg.norm(v)
+			d = random.uniform(-.5,.5)
+			#pick a random unit norm functional
+			t = numpy.matrix.trace(H)/3
+			I = numpy.identity(3)
+			H = H - t*I
+			#"random" trace 0 matrix
+			for term in pointlist:
+				s = np.dot(term, v) + d
+				G = expm(H*s/float(10))
+				newterm = np.dot(term,G)
+				term[0] = newterm[0]
+				term[1] = newterm[1]
+				term[2] = newterm[2]
+		if int(word[i]) == 6:
+			#shuffle coordinates
+			np.random.shuffle(np.transpose(pointlist))
+		i = i + 1
+	return pointlist

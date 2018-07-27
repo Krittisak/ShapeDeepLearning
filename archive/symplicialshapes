@@ -1,0 +1,173 @@
+##Comments -- if we want to be more ambitious later, we can sample random simplicial complexes, as in "Crackle, the homology of noise. The point is to start with a point process, to generate the 0 skeleton, then start inductively building the complex randomly. Right now our classifier is only in principle going to learn the difference between a torus and a sphere, so this is too much for now. Just wanted to comment here for future reference.
+##(However, we can add noise using a similar idea.)
+
+def pyramid(n):
+	points = []
+
+	e1 = np.array([1,0,0])
+	e2 = np.array([0,1,0])
+	e3 = np.array([0,0,1])
+	
+	i = 0
+	while i < n:
+		face = random.uniform(0,4)
+		if face < 1:
+			#base (e1,e2)
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			while (a + b) > 1:
+				a = random.uniform(0,1)
+				b = random.uniform(0,1)
+			point = a*e1 + b*e2
+		else:
+			if face < 2:
+				#face 1(e1,e3)
+				a = random.uniform(0,1)
+				b = random.uniform(0,1)
+				while (a + b) > 1:
+					a = random.uniform(0,1)
+					b = random.uniform(0,1)
+				point = a*e1 + b*e3
+			else:
+				if face < 3:
+					#face 2(e2,e3)
+					a = random.uniform(0,1)
+					b = random.uniform(0,1)
+					while (a + b) > 1:
+						a = random.uniform(0,1)
+						b = random.uniform(0,1)
+					point = a*e2 + b*e3
+				else:
+					#face 3
+					a = random.uniform(0,1)
+					b = random.uniform(0,1)
+					while (a + b) > 1:
+						a = random.uniform(0,1)
+						b = random.uniform(0,1)
+					c = 1 - (a + b)
+					point = a*e1 + b*e2 + c*e3
+		points.append(point)
+		i = i + 1
+	return points	
+	
+	
+def cube(n):
+	points = []
+
+	e1 = np.array([1,0,0])
+	e2 = np.array([0,1,0])
+	e3 = np.array([0,0,1])
+	
+	i = 0
+	while i < n:
+		face = random.choice([1,2,3,4,5,6])
+		if face == 1:
+			#base (e1,e2)
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			point = a*e1 + b*e2
+		if face == 2:
+			#face 1(e1,e3)
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			point = a*e1 + b*e3
+		if face == 3:
+			#face 2(e2,e3)
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			point = a*e2 + b*e3
+		if face == 4:
+			#base (e1,e2) + zhat
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			point = a*e1 + b*e2 + np.array([0,0,1])
+		if face == 5:
+			#face 1(e1,e3) + yhat
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			point = a*e1 + b*e3 + np.array([0,1,0])
+		if face == 6:
+			#face 2(e2,e3) + xhat
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			point = a*e2 + b*e3 + np.array([1,0,0])
+		
+		points.append(point)
+		i = i + 1
+	return points	
+	
+def squaretorus(n):
+	#can adjust various dimensions later...
+	points = []
+
+	e1 = np.array([1,0,0])
+	e2 = np.array([0,1,0])
+	e3 = np.array([0,0,1])
+	
+	i = 0
+	while i < n:
+	
+		face = random.choice([1,2,3,4,5,6,7,8,9,10])
+
+		##Outer faces
+
+		if face == 1:
+			#base (e1,e2)
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			while ((a > 1/float(3)) and (a < 2/float(3))) and ((b > 1/float(3)) and (b < 2/float(3))):
+				a = random.uniform(0,1)
+				b = random.uniform(0,1)
+			#(removes and inner square from base)
+			point = a*e1 + b*e2
+		if face == 2:
+			#face 1(e1,e3)
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			point = a*e1 + b*e3
+		if face == 3:
+			#face 2(e2,e3)
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			point = a*e2 + b*e3
+		if face == 4:
+			#base (e1,e2) + zhat
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			while ((a > 1/float(3)) and (a < 2/float(3))) and ((b > 1/float(3)) and (b < 2/float(3))):
+				a = random.uniform(0,1)
+				b = random.uniform(0,1)
+			#(removes and inner square from top)
+			point = a*e1 + b*e2 + np.array([0,0,1])
+		if face == 5:
+			#face 1(e1,e3) + yhat
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			point = a*e1 + b*e3 + np.array([0,1,0])
+		if face == 6:
+			#face 2(e2,e3) + xhat
+			a = random.uniform(0,1)
+			b = random.uniform(0,1)
+			point = a*e2 + b*e3 + np.array([1,0,0])
+		###Inner faces:
+		if face == 7:
+			a = random.uniform(1/float(3), 2 /float(3))
+			b = random.uniform(0,1)
+			point = a*e2 + b*e3 + (1 / float(3))*e1
+		if face == 8:
+			a = random.uniform(1/float(3), 2 /float(3))
+			b = random.uniform(0,1)
+			point = a*e1 + b*e3 + (1 / float(3))*e2
+		if face == 9:
+			a = random.uniform(1/float(3), 2 /float(3))
+			b = random.uniform(0,1)
+			point = a*e2 + b*e3 + (2 / float(3))*e1
+		if face == 10:
+			a = random.uniform(1/float(3), 2 /float(3))
+			b = random.uniform(0,1)
+			point = a*e1 + b*e3 + (2 / float(3))*e2
+		points.append(point)
+		i = i + 1
+	return points
+	
+		

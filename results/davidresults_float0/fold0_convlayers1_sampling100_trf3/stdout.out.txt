@@ -1,0 +1,25 @@
+convlayers1_sampling100_trf3_config.json
+{'activation_function1': 'relu', 'activation_function2': 'softmax', 'batch_size': 32, 'dropout1': 0.2, 'dropout2': 0.5, 'earlystop': 1, 'epochs': 25, 'filter_count': 32, 'filter_size': 3, 'fold': 0, 'folds': 5, 'grid_radius': 20, 'grid_resolution': 0.5, 'kfcv': 1, 'kfcv_serial': 1, 'layer_count': 1, 'learning_rate': 0.01, 'momentum': 0.9, 'noise': 0, 'poly_transformation': 0, 'pooling': 2, 'random_seed': 4975, 'root_name': 'convlayers1_sampling100_trf3', 'rotation': 0, 'sampling_floats': 0, 'sampling_rate': 100, 'save_model': 0, 'scale': 7, 'scale_randomness': 0, 'test_classes': ['sphere', 'torus'], 'testing_size': 120, 'train_classes': ['sphere', 'torus'], 'training_size': 480, 'transformation': 0.3, 'translation': 0, 'validation_split': 0.3333333, 'visualize': 0}
+Generating Data
+Generating Data - Complete!
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 160 samples
+Epoch 1/25
+320/320 [==============================] - 292s - loss: 0.6340 - acc: 0.7500 - val_loss: 0.5341 - val_acc: 0.8625
+Epoch 2/25
+320/320 [==============================] - 292s - loss: 0.5544 - acc: 0.7625 - val_loss: 8.5627 - val_acc: 0.4688
+Epoch 3/25
+320/320 [==============================] - 291s - loss: 8.5124 - acc: 0.4719 - val_loss: 8.5627 - val_acc: 0.4688
+Epoch 4/25
+320/320 [==============================] - 291s - loss: 8.5124 - acc: 0.4719 - val_loss: 8.5627 - val_acc: 0.4688
+Epoch 5/25
+320/320 [==============================] - 291s - loss: 8.5124 - acc: 0.4719 - val_loss: 8.5627 - val_acc: 0.4688
+120/120 [==============================] - 38s    Using Theano backend.
+
+Total predicted: 120
+Num Correct: 56
+Accuracy: 0.4666666666666667

@@ -1,0 +1,28 @@
+universe = vanilla
+# Name the log file:
+log = condor_$(filename)_log.txt
+
+# Name the files where standard output and error should be saved:
+output = condor_$(filename)_out.txt
+error = condor_$(filename)_err.txt
+
+# If you wish to compile code, you'll need the below lines.
+#  Otherwise, LEAVE THEM OUT if you just want to interactively test!
+
+requirements = (OpSysMajorVer == 7)  && ( IsBuildSlot == true )
++IsBuildJob = true
+# Indicate all files that need to go into the interactive job session,
+#  including any tar files that you prepared:
+transfer_input_files = $(filename), code.tar.gz, http://proxy.chtc.wisc.edu/SQUID/aschoen2/170504/miniconda.tar.gz
+executable = initialize.sh
+arguments = $(filename)
+
+# It's still important to request enough computing resources. The below
+#  values are a good starting point, but consider your file sizes for an
+#  estimate of "disk" and use any other information you might have
+#  for "memory" and/or "cpus".
+request_cpus = 4
+request_memory = 32GB
+request_disk = 16GB
+
+queue filename matching files *.json

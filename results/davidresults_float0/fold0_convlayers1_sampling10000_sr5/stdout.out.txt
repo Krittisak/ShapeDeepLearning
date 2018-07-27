@@ -1,0 +1,39 @@
+convlayers1_sampling10000_sr5_config.json
+{'activation_function1': 'relu', 'activation_function2': 'softmax', 'batch_size': 32, 'dropout1': 0.2, 'dropout2': 0.5, 'earlystop': 1, 'epochs': 25, 'filter_count': 32, 'filter_size': 3, 'fold': 0, 'folds': 5, 'grid_radius': 20, 'grid_resolution': 0.5, 'kfcv': 1, 'kfcv_serial': 1, 'layer_count': 1, 'learning_rate': 0.01, 'momentum': 0.9, 'noise': 0, 'poly_transformation': 0, 'pooling': 2, 'random_seed': 3023, 'root_name': 'convlayers1_sampling10000_sr5', 'rotation': 0, 'sampling_floats': 0, 'sampling_rate': 10000, 'save_model': 0, 'scale': 7, 'scale_randomness': 3, 'test_classes': ['sphere', 'torus'], 'testing_size': 120, 'train_classes': ['sphere', 'torus'], 'training_size': 480, 'transformation': 0, 'translation': 0, 'validation_split': 0.3333333, 'visualize': 0}
+Generating Data
+Generating Data - Complete!
+DATASET PARAMETERS:
+k-Crossfold Validation?: 1
+ --- Num folds: 5
+ --- Curr test fold (starting at 0): 0
+
+Train on 320 samples, validate on 160 samples
+Epoch 1/25
+320/320 [==============================] - 290s - loss: 0.1869 - acc: 0.9062 - val_loss: 0.0400 - val_acc: 0.9875
+Epoch 2/25
+320/320 [==============================] - 289s - loss: 0.0381 - acc: 0.9969 - val_loss: 0.0279 - val_acc: 0.9875
+Epoch 3/25
+320/320 [==============================] - 290s - loss: 0.0287 - acc: 0.9938 - val_loss: 0.0236 - val_acc: 0.9875
+Epoch 4/25
+320/320 [==============================] - 290s - loss: 0.0265 - acc: 0.9906 - val_loss: 0.0212 - val_acc: 0.9938
+Epoch 5/25
+320/320 [==============================] - 290s - loss: 0.0228 - acc: 0.9844 - val_loss: 0.0215 - val_acc: 0.9812
+Epoch 6/25
+320/320 [==============================] - 290s - loss: 0.0204 - acc: 0.9969 - val_loss: 0.0218 - val_acc: 0.9812
+Epoch 7/25
+320/320 [==============================] - 291s - loss: 0.0194 - acc: 0.9969 - val_loss: 0.0217 - val_acc: 0.9812
+Epoch 8/25
+320/320 [==============================] - 291s - loss: 0.0189 - acc: 0.9906 - val_loss: 0.0210 - val_acc: 0.9812
+Epoch 9/25
+320/320 [==============================] - 291s - loss: 0.0178 - acc: 0.9938 - val_loss: 0.0214 - val_acc: 0.9812
+Epoch 10/25
+320/320 [==============================] - 292s - loss: 0.0405 - acc: 0.9906 - val_loss: 0.0249 - val_acc: 0.9938
+Epoch 11/25
+320/320 [==============================] - 291s - loss: 0.0178 - acc: 0.9938 - val_loss: 0.0288 - val_acc: 0.9812
+Epoch 12/25
+320/320 [==============================] - 292s - loss: 0.0186 - acc: 0.9906 - val_loss: 0.0307 - val_acc: 0.9812
+120/120 [==============================] - 38s    Using Theano backend.
+
+Total predicted: 120
+Num Correct: 120
+Accuracy: 1.0
